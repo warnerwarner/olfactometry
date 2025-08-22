@@ -1,0 +1,48 @@
+{
+    "Olfactometers":[
+        {
+            "interface":"teensy",
+            "com_port":"COM5",
+            "slave_index":1,
+            "Vials":{
+                "4":{
+                    "odor":"dummy",
+                    "conc":0
+                },
+                "5":{
+                    "odor":"test1",
+                    "conc":1
+                },
+                "6":{
+                    "odor":"test2",
+                    "conc":1
+                },
+                "7":{
+                    "odor":"test3",
+                    "conc":1
+                },
+                "8": {
+                    "odor": "test4",
+                    "conc": 1
+                },
+                "9": {
+                    "odor": "test5",
+                    "conc": 1
+                },
+                "10": {
+                    "odor": "test6",
+                    "conc": 1
+                },
+                "11": {
+                    "odor": "test7",
+                    "conc": 1
+                },
+                "12": {
+                    "odor": "test8",
+                    "conc": 1
+                }
+            },
+            "MFCs":[]
+        }
+    ]
+}
