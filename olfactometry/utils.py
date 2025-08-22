@@ -23,7 +23,7 @@ def get_olfa_config(config_filename=''):
         logging.info("No olfa config file specified, looking for default in OLFA_CONFIG os variable")
         config_filename = os.environ.get("OLFA_CONFIG")
         #if it didnt find it there, it tries the legacy default
-        if config_filename < 1:
+        if config_filename is None:
             config_filename = CONFIG_FILENAME_DEFAULT
             logging.info("No OLFA_CONFIG os variable, trying with legacy default " + CONFIG_FILENAME_DEFAULT)
 
@@ -93,7 +93,7 @@ def connect_serial(port, baudrate=115200, timeout=1, writeTimeout=1):
         print('Listing current serial ports with devices:')
         for ser in list_ports.comports():
             ser_str = '\t{0}: {1}'.format(ser[0], ser[1])
-            print ser_str
+            print(ser_str)
         time.sleep(.01)  # just to let the above lines print before the exemption is raised. cleans console output.
         raise serial.SerialException('Requested COM port: {0} is not listed as connected.'.format(port))
     else:

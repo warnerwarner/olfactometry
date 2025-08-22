@@ -2,7 +2,7 @@ from __future__ import division
 import numpy as np
 import scipy.stats as stats
 import tables as tb
-from PyQt4 import QtCore, QtGui
+from PyQt6 import QtCore, QtGui
 import logging
 import os
 from matplotlib.backends.backend_qt4agg import FigureCanvas
@@ -139,7 +139,7 @@ class CalibrationViewer(QtGui.QMainWindow):
             mask *= v.trial_mask
         self.trial_mask = mask
         self.trial_select_list.itemSelectionChanged.disconnect(self._trial_selection_changed)
-        for i in xrange(len(self.trial_mask)):
+        for i in range(len(self.trial_mask)):
             hide = not self.trial_mask[i]
             it = self.trial_select_list.item(i)
             it.setHidden(hide)
@@ -249,7 +249,7 @@ class CalibrationViewer(QtGui.QMainWindow):
         ii = 0
         remove_trialnums = []
         new_trials_mask = np.zeros_like(new_trials_array, dtype=bool)
-        for i in xrange(len(self.trial_select_list.trial_num_list)):
+        for i in range(len(self.trial_select_list.trial_num_list)):
             if i not in remove_idxes:
                 new_trials_mask[ii] = self.trial_mask[i]
                 new_trials_array[ii] = self.trial_select_list.trial_num_list[i]
@@ -273,7 +273,7 @@ class CalibrationViewer(QtGui.QMainWindow):
             selected_trial_nums.append(trialnum)
         self.update_plots(selected_trial_nums)
         self.trial_group_list.blockSignals(True)
-        for i, g in zip(xrange(self.trial_group_list.count()), self.trial_group_list.trial_groups):
+        for i, g in zip(range(self.trial_group_list.count()), self.trial_group_list.trial_groups):
             it = self.trial_group_list.item(i)
             all_in = True
             group_trials = g['trial_nums']
@@ -345,11 +345,11 @@ class CalibrationViewer(QtGui.QMainWindow):
         for i in trial_streams:
             minlen = min(len(i), minlen)
         streams_array = np.empty((ntrials, minlen))
-        for i in xrange(ntrials):
+        for i in range(ntrials):
             streams_array[i, :] = trial_streams[i][:minlen]
         for g in all_groups:
             mask = np.empty(ntrials, dtype=bool)
-            for i in xrange(ntrials):
+            for i in range(ntrials):
                 groups = groups_by_trial[i]
                 mask[i] = g in groups
             c = concs[mask]
@@ -467,7 +467,7 @@ class TrialGroupListWidget(QtGui.QListWidget):
     def get_trial_groups(self, trialnum):
         groups = []
         trial_groups = self.trial_groups
-        for i in xrange(self.count()):
+        for i in range(self.count()):
             g = trial_groups[i]
             if trialnum in g['trial_nums']:
                 groups.append(i)
@@ -593,7 +593,7 @@ class FiltersListWidget(QtGui.QListWidget):
     def toggle_visible(self):
         self.setVisible(not self.isVisible())
         if not self.isVisible():
-            for i in xrange(self.count()):
+            for i in range(self.count()):
                 field = self.item(i)
                 field.setSelected(True)
 
@@ -655,7 +655,7 @@ class FiltersListWidget(QtGui.QListWidget):
     def remove_trials(self, removeidx_list):
         new_trial_val_list = []
         new_trial_mask_list = []
-        for i in xrange(len(self.trial_values)):
+        for i in range(len(self.trial_values)):
             if i not in removeidx_list:
                 val = self.trial_values[i]
                 new_trial_val_list.append(val)
@@ -920,7 +920,7 @@ def remove_stream_trend(stream, slice_indeces, x=None):
     if not x:
         x = np.linspace(0, len(stream_slice)-1, len(stream_slice))
     a, b, _, _, _ = stats.linregress(x, stream_slice)
-    for i in xrange(len(stream)):
+    for i in range(len(stream)):
         stream[i] -= i * a
     return stream
 

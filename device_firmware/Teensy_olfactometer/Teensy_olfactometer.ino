@@ -532,7 +532,10 @@ void loop()
       buffer[idx] = 0;
       Serial.println();
       parse((char*)buffer, argv, sizeof(argv));
-      if (strcmp(argv[0], "valve") == 0) {
+      if (strcmp(argv[0], "test") == 0){
+        Serial.print("Yes!");
+      }
+      else if (strcmp(argv[0], "valve") == 0) {
         if (strlen(argv[1]) > 0 && strlen(argv[2]) > 0) {
           arg1 = atoi(argv[1]);
           arg2 = atoi(argv[2]);
